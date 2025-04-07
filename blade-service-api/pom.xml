@@ -45,8 +45,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <skip>true</skip>
-                    <finalName>${project.name}</finalName>
+                    <skip>true</skip><!--默认跳过 Spring Boot 的打包流程，不生成可执行 JAR。通常用于多模块项目中，某些子模块（如纯库模块）不需要独立运行。-->
+                    <finalName>${project.name}</finalName><!--指定生成的 JAR 文件名（覆盖默认的 ${project.artifactId}-${project.version}）-->
                 </configuration>
             </plugin>
             <plugin>
@@ -54,7 +54,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.plugin.version}</version>
                 <configuration>
-                    <skipDockerBuild>true</skipDockerBuild>
+                    <skipDockerBuild>true</skipDockerBuild><!--默认跳过 Docker 镜像构建。通常通过 Maven 命令行参数动态启用（如 -DskipDockerBuild=false）-->
                 </configuration>
             </plugin>
         </plugins>

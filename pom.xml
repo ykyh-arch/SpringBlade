@@ -39,7 +39,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- blade bom -->
+            <!-- blade bom 相当于BladeTool,作用类似于springboot-dependence封装的公共的依赖包-->
             <dependency>
                 <groupId>org.springblade</groupId>
                 <artifactId>blade-core-bom</artifactId>
@@ -149,6 +149,10 @@
                 <version>0.11.2</version>
             </dependency>
             <!-- Mica -->
+            <!-- 基于 Java 的自动配置插件，常用注解： -->
+            <!-- @AutoService：自动将类注册到 spring.factories 中的 org.springframework.boot.autoconfigure.EnableAutoConfiguration 下。 -->
+            <!-- @AutoConfiguration：类似于 @AutoService，用于标记自动配置类。 -->
+            <!-- @AutoFeign：用于自动生成 Feign 客户端的实现类。 -->
             <dependency>
                 <groupId>net.dreamlu</groupId>
                 <artifactId>mica-auto</artifactId>
@@ -197,6 +201,8 @@
                     </executions>
                 </plugin>
 
+                <!-- 在 Maven 构建的 package 阶段执行一个 Ant 任务， -->
+                <!-- 作用是：在打包完成后，将生成的 JAR 文件复制到项目根目录的 target 文件夹中。也可以通过 maven-resources-plugin 实现 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
@@ -220,15 +226,26 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <!-- 整体协作流程 -->
+        <!-- 初始化阶段： -->
+        <!-- directory-maven-plugin 确定项目根目录路径。 -->
+        <!-- 编译阶段： -->
+        <!-- maven-compiler-plugin 编译代码，保留参数名。 -->
+        <!-- 资源处理阶段： -->
+        <!-- flatten-maven-plugin 生成简化版 POM。 -->
+        <!-- 打包阶段： -->
+        <!-- spring-boot-maven-plugin 构建可执行 JAR。 -->
         <plugins>
+            <!--扁平化 POM 文件，生成一个简化版的 pom.xml（默认生成在 .flattened-pom.xml），-->
+            <!--移除开发阶段专用的配置（如 SCM、开发者信息、仓库等），适用于发布到 Maven 仓库。-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
                 <version>${maven.flatten.version}</version>
                 <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>oss</flattenMode>
-                    <pomElements>
+                    <updatePomFile>true</updatePomFile><!--直接修改原 POM 文件（谨慎使用）。-->
+                    <flattenMode>oss</flattenMode><!--使用预定义的 OSS（开源）模式，保留许可证等信息。-->
+                    <pomElements><!--指定要移除的 POM 元素-->
                         <url>remove</url>
                         <scm>remove</scm>
                         <developers>remove</developers>
@@ -238,6 +255,7 @@
                     </pomElements>
                 </configuration>
                 <executions>
+                    <!--process-resources 阶段生成扁平化 POM。clean 阶段清理生成的扁平化文件。-->
                     <execution>
                         <id>flatten</id>
                         <phase>process-resources</phase>
@@ -258,6 +276,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--控制 Java 源代码的编译行为。指定jdk版本、utf-8、编译参数保留参数名-->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.plugin.version}</version>
@@ -270,6 +289,7 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <!--目录管理，在多模块项目中，识别项目的根目录路径，并将其保存到 Maven 属性（如 ${project.root.directory}）。-->
             <plugin>
                 <groupId>org.commonjava.maven.plugins</groupId>
                 <artifactId>directory-maven-plugin</artifactId>
@@ -278,11 +298,11 @@
                     <execution>
                         <id>directories</id>
                         <goals>
-                            <goal>highest-basedir</goal>
+                            <goal>highest-basedir</goal><!--找到最顶层的项目根目录。-->
                         </goals>
                         <phase>initialize</phase>
                         <configuration>
-                            <property>project.root.directory</property>
+                            <property>project.root.directory</property><!--将根目录路径赋给该变量。-->
                         </configuration>
                     </execution>
                 </executions>

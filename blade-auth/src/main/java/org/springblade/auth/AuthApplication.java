@@ -21,7 +21,7 @@ import org.springblade.core.launch.BladeApplication;
 import org.springblade.core.launch.constant.AppConstant;
 
 /**
- * 用户认证服务器
+ * 用户认证服务器，参考：{@link org.springblade.core.launch.BladeApplication }
  *
  * @author Chill
  */
@@ -29,6 +29,7 @@ import org.springblade.core.launch.constant.AppConstant;
 public class AuthApplication {
 
 	public static void main(String[] args) {
+		// 启动参数设置
 		BladeApplication.run(AppConstant.APPLICATION_AUTH_NAME, AuthApplication.class, args);
 	}
 

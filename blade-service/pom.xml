@@ -35,24 +35,26 @@
 
     <build>
         <plugins>
+            <!--以maven插件的方式，将target/blade-service.jar打包镜像并推送到镜像仓库-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.plugin.version}</version>
                 <configuration>
-                    <imageName>${docker.registry.url}/blade/${project.artifactId}:${project.version}</imageName>
-                    <dockerDirectory>${project.basedir}</dockerDirectory>
-                    <dockerHost>${docker.registry.host}</dockerHost>
+                    <imageName>${docker.registry.url}/blade/${project.artifactId}:${project.version}</imageName><!-- 10.211.55.5/blade/blade-service:4.5.0 -->
+                    <dockerDirectory>${project.basedir}</dockerDirectory><!--Dockerfile位置-->
+                    <dockerHost>${docker.registry.host}</dockerHost><!--Docker守护进程连接-->
                     <resources>
+                        <!--将构建目录（通常是target/）下的JAR文件（如myapp-1.0.0.jar）复制到镜像的根路径-->
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <registryUrl>${docker.registry.url}</registryUrl>
-                    <serverId>${docker.registry.url}</serverId>
-                    <pushImage>true</pushImage>
+                    <registryUrl>${docker.registry.url}</registryUrl><!--镜像仓库配置-->
+                    <serverId>${docker.registry.url}</serverId><!--对应Maven的settings.xml中配置的认证信息-->
+                    <pushImage>true</pushImage><!--构建后自动推送镜像-->
                 </configuration>
             </plugin>
         </plugins>

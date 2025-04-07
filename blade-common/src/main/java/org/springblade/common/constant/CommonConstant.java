@@ -1,7 +1,7 @@
 package org.springblade.common.constant;
 
 /**
- * 通用常量
+ * 通用常量，启动加载的扩展常量
  *
  * @author Chill
  */

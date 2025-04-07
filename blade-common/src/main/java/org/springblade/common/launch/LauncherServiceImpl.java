@@ -23,7 +23,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import java.util.Properties;
 
 /**
- * 启动参数拓展
+ * 启动参数拓展，参考 {@link org.springblade.core.launch.StartEventListener }
  *
  * @author smallchil
  */
@@ -31,6 +31,7 @@ public class LauncherServiceImpl implements LauncherService {
 
 	@Override
 	public void launcher(SpringApplicationBuilder builder, String appName, String profile) {
+		// 系统属性扩展启动参数，SimpleCommandLinePropertySource > MapPropertySource / JNDI Java 系统属性 > SystemEnvironmentPropertySource > 配置文件（如 application.yml）
 		Properties props = System.getProperties();
 		PropsUtil.setProperty(props, "spring.cloud.nacos.username", LauncherConstant.NACOS_USERNAME);
 		PropsUtil.setProperty(props, "spring.cloud.nacos.password", LauncherConstant.NACOS_PASSWORD);

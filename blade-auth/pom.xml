@@ -16,7 +16,7 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--Blade-->
+        <!--Blade Common -->
         <dependency>
             <groupId>org.springblade</groupId>
             <artifactId>blade-common</artifactId>
@@ -68,6 +68,7 @@
 
     <build>
         <plugins>
+            <!--以maven插件的方式，将target/blade-auth.jar打包镜像并推送到镜像仓库-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -88,6 +89,8 @@
                     <pushImage>true</pushImage>
                 </configuration>
             </plugin>
+            <!-- 在 Maven 构建的 package 阶段执行一个 Ant 任务， -->
+            <!-- 作用是：在打包完成后，将生成的 JAR 文件复制到项目根目录的 target 文件夹中。也可以通过 maven-resources-plugin 实现 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>

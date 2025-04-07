@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 公共封装包配置类
+ * 1、启动加载自定义的配置项，如：nacos、sentinel、zipkin
  *
  * @author Chill
  */

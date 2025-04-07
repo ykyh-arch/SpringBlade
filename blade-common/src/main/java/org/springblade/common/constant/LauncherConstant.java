@@ -76,14 +76,11 @@ public interface LauncherConstant {
 	 * @return addr
 	 */
 	static String nacosAddr(String profile) {
-		switch (profile) {
-			case (AppConstant.PROD_CODE):
-				return NACOS_PROD_ADDR;
-			case (AppConstant.TEST_CODE):
-				return NACOS_TEST_ADDR;
-			default:
-				return NACOS_DEV_ADDR;
-		}
+		return switch (profile) {
+			case (AppConstant.PROD_CODE) -> NACOS_PROD_ADDR;
+			case (AppConstant.TEST_CODE) -> NACOS_TEST_ADDR;
+			default -> NACOS_DEV_ADDR;
+		};
 	}
 
 	/**
@@ -93,14 +90,11 @@ public interface LauncherConstant {
 	 * @return addr
 	 */
 	static String sentinelAddr(String profile) {
-		switch (profile) {
-			case (AppConstant.PROD_CODE):
-				return SENTINEL_PROD_ADDR;
-			case (AppConstant.TEST_CODE):
-				return SENTINEL_TEST_ADDR;
-			default:
-				return SENTINEL_DEV_ADDR;
-		}
+		return switch (profile) {
+			case (AppConstant.PROD_CODE) -> SENTINEL_PROD_ADDR;
+			case (AppConstant.TEST_CODE) -> SENTINEL_TEST_ADDR;
+			default -> SENTINEL_DEV_ADDR;
+		};
 	}
 
 	/**
@@ -110,14 +104,11 @@ public interface LauncherConstant {
 	 * @return addr
 	 */
 	static String zipkinAddr(String profile) {
-		switch (profile) {
-			case (AppConstant.PROD_CODE):
-				return ZIPKIN_PROD_ADDR;
-			case (AppConstant.TEST_CODE):
-				return ZIPKIN_TEST_ADDR;
-			default:
-				return ZIPKIN_DEV_ADDR;
-		}
+		return switch (profile) {
+			case (AppConstant.PROD_CODE) -> ZIPKIN_PROD_ADDR;
+			case (AppConstant.TEST_CODE) -> ZIPKIN_TEST_ADDR;
+			default -> ZIPKIN_DEV_ADDR;
+		};
 	}
 
 }

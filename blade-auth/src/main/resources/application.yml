@@ -1,4 +1,4 @@
-#第三方登陆配置
+# 第三方登陆配置
 social:
   oauth:
     GITHUB:

@@ -71,12 +71,13 @@ public class AuthController {
 			.set("userType", userType);
 
 		ITokenGranter granter = TokenGranterBuilder.getGranter(grantType);
+		// 统一认证
 		UserInfo userInfo = granter.grant(tokenParameter);
 
 		if (userInfo == null || userInfo.getUser() == null || userInfo.getUser().getId() == null) {
 			return R.fail(TokenUtil.USER_NOT_FOUND);
 		}
-
+        // 返回认证信息，包含访问令牌等
 		return R.data(TokenUtil.createAuthInfo(userInfo));
 	}
 

@@ -17,6 +17,7 @@ package org.springblade.desk.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springblade.core.datascope.annotation.DataAuth;
 import org.springblade.desk.entity.Notice;
 
 import java.util.List;

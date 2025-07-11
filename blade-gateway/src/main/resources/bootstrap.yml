@@ -6,9 +6,26 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          lower-case-service-id: true  # 强制服务ID小写（默认true）
+          enabled: true  # 启用基于服务发现的自动路由，以下手动方式可以不用配置，配置后优先级高于自动配置
+#      routes:
+#        - id: custom-route
+#          uri: lb://order-service  # 手动配置路由（优先于自动路由）
+#          predicates:
+#            - Path=/api/orders/**
+#        # 认证中心
+#        - id: tri-auth
+#          uri: lb://tri-auth
+#          predicates:
+#            - Path=/tri-auth/**
+#          filters:
+#            - CacheRequestFilter
+#            - ValidateCodeFilter
+#            - StripPrefix=1
     loadbalancer:
       retry:
         enabled: true
+        # max-retries: 3 # 最大重试次数
+        # retryable-status-codes: 500,503,404 # 触发重试的HTTP状态码
 
 

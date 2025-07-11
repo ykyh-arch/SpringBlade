@@ -59,7 +59,7 @@ public class TokenUtil {
 	public static AuthInfo createAuthInfo(UserInfo userInfo) {
 		User user = userInfo.getUser();
 
-		//设置jwt参数
+		// 设置jwt参数
 		Map<String, String> param = new HashMap<>(16);
 		param.put(TokenConstant.TOKEN_TYPE, TokenConstant.ACCESS_TOKEN);
 		param.put(TokenConstant.TENANT_ID, user.getTenantId());

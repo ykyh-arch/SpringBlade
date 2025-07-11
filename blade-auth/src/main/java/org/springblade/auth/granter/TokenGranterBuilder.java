@@ -37,6 +37,7 @@ public class TokenGranterBuilder {
 	private static final Map<String, ITokenGranter> GRANTER_POOL = new ConcurrentHashMap<>();
 
 	static {
+		// 统一认证的几种方式，支持Password、Captcha、RefreshToken、SocialToken四种模式
 		GRANTER_POOL.put(PasswordTokenGranter.GRANT_TYPE, SpringUtil.getBean(PasswordTokenGranter.class));
 		GRANTER_POOL.put(CaptchaTokenGranter.GRANT_TYPE, SpringUtil.getBean(CaptchaTokenGranter.class));
 		GRANTER_POOL.put(RefreshTokenGranter.GRANT_TYPE, SpringUtil.getBean(RefreshTokenGranter.class));

@@ -26,6 +26,10 @@ import org.springblade.core.tool.support.Kv;
 @Data
 public class TokenParameter {
 
+	// 底层是基于 LinkedCaseInsensitiveMap 实现的，可提供以下功能：
+	// 1.不区分大小写的键查找，例如 "KEY"、"key" 和 "Key" 会被认为是同一个键，value 会覆盖上一个值
+	// 2.同时需要保持插入顺序，基于 LinkedHashMap
+	// 3.保留原始键的大小写形式，（最后一次插入的大小写形式）
 	private Kv args = Kv.init();
 
 }

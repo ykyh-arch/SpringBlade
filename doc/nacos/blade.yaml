@@ -32,7 +32,7 @@ feign:
   httpclient:
     enabled: false
 
-#对外暴露端口
+# 对外暴露端口
 management:
   endpoints:
     web:

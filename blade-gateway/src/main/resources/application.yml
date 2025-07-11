@@ -1,16 +1,29 @@
+# 这段配置是 Knife4j（一个基于 Swagger/OpenAPI 的 API 文档增强工具）在 Spring Cloud Gateway 网关环境下的聚合配置，主要用于聚合微服务系统的 API 文档。
 knife4j:
   gateway:
-    enabled: true
-    tags-sorter: order
-    operations-sorter: order
-    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组
-    strategy: discover
+    enabled: true # 启用 Knife4j 的网关聚合功能
+    # 控制文档页面的排序方式，order 表示按配置顺序显示（默认是字母序）。其他可选值：alpha（字母序）、method（HTTP方法排序）。
+    tags-sorter: order # 接口分组（Tags）按配置的顺序排序
+    operations-sorter: order  # 接口列表按配置的顺序排序
+    # 指定服务发现的模式聚合微服务文档，并且是默认`default`分组，表示通过注册中心（如 Nacos、Eureka）自动发现微服务并聚合它们的 API 文档，生成统一的网关文档入口。
+    strategy: discover # 使用服务发现模式聚合微服务文档
     discover:
-      enabled: true
+      enabled: true  # 启用服务发现模式
       # 指定版本号(Swagger2|OpenAPI3)
       version : openapi3
-      # 需要排除的微服务(eg:网关服务)
+      # 需要排除的微服务(eg:网关服务)，排除不需要聚合文档的微服务（通常是网关自身、管理后台、日志服务等）。这些服务的 API 不会出现在聚合文档中。
       excluded-services:
         - blade-admin
         - blade-gateway
         - blade-log
+
+# 网关聚合文档配置的作用总结
+# 通过网关统一访问所有微服务的 API 文档，无需逐个访问每个服务的 Swagger UI。
+# 自动发现微服务
+# 动态从注册中心获取微服务列表，并聚合它们的 OpenAPI 文档。
+# 过滤无关服务
+# 排除网关自身或其他非业务服务（如 blade-admin），避免文档冗余。
+# 典型使用场景
+# 微服务架构中，前端开发人员通过网关地址（如 http://gateway:port/doc.html）直接查看所有服务的 API 文档。
+# 统一管理文档的排序和分组，提升可读性。
+# 注意：确保微服务已正确集成 Swagger 或 OpenAPI 并注册到服务发现中心，否则无法被聚合。

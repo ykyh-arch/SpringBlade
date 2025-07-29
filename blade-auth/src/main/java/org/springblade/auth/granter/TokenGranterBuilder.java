@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * TokenGranterBuilder
+ * TokenGranterBuilder token 授权构建器
  *
  * @author Chill
  */

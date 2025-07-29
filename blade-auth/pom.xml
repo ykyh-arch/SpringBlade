@@ -53,7 +53,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot-autoconfigure</artifactId>
         </dependency>
-        <!-- Captcha -->
+        <!-- Captcha 验证码-->
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>

@@ -71,20 +71,37 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		if (StringUtil.isBlank(roleId)) {
 			return null;
 		}
+		// 获取所有菜单数据
 		List<Menu> allMenus = baseMapper.allMenu();
+		// 根据角色ID获取该角色拥有的菜单（角色菜单）
 		List<Menu> roleMenus = baseMapper.roleMenu(Func.toLongList(roleId));
+		// 创建路由菜单列表，初始化为角色拥有的菜单
 		List<Menu> routes = new LinkedList<>(roleMenus);
+		// 对每个角色拥有的菜单进行递归处理，查找其所有父级菜单
 		roleMenus.forEach(roleMenu -> recursion(allMenus, routes, roleMenu));
+		// 路由菜单排序
 		routes.sort(Comparator.comparing(Menu::getSort));
+		// 菜单包装类
 		MenuWrapper menuWrapper = new MenuWrapper();
+		// 过滤得到目录菜单
 		List<Menu> collect = routes.stream().filter(x -> Func.equals(x.getCategory(), 1)).collect(Collectors.toList());
 		return menuWrapper.listNodeVO(collect);
 	}
 
+	/**
+	 * 递归查找菜单的所有父级菜单
+	 * @param allMenus 所有菜单列表
+	 * @param routes 最终返回的菜单路由列表
+	 * @param roleMenu 当前处理的角色菜单项
+	 */
 	public void recursion(List<Menu> allMenus, List<Menu> routes, Menu roleMenu) {
+		// 在所有菜单中查找当前菜单的父菜单
 		Optional<Menu> menu = allMenus.stream().filter(x -> Func.equals(x.getId(), roleMenu.getParentId())).findFirst();
+		// 如果找到父菜单且路由列表中尚未包含该父菜单
 		if (menu.isPresent() && !routes.contains(menu.get())) {
+			// 将父菜单添加到路由列表
 			routes.add(menu.get());
+			// 递归继续查找父菜单的父菜单
 			recursion(allMenus, routes, menu.get());
 		}
 	}

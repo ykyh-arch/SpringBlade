@@ -21,7 +21,7 @@ import java.util.List;
 public class UserImportListener extends AnalysisEventListener<UserExcel> {
 
 	/**
-	 * 默认每隔3000条存储数据库
+	 * 默认每隔3000条存储数据库，批量处理阈值（默认3000条）
 	 */
 	private int batchCount = 3000;
 	/**

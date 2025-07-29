@@ -140,7 +140,7 @@ public class MenuController extends BladeController {
 	}
 
 	/**
-	 * 前端菜单数据
+	 * 前端菜单数据，对于参数：BladeUser 数据的获取逻辑，参考：{@link org.springblade.core.boot.resolver.TokenArgumentResolver}，即从请求头中获取：blade-auth，从而获取用户信息
 	 */
 	@GetMapping("/routes")
 	@ApiOperationSupport(order = 7)

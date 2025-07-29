@@ -31,7 +31,8 @@ public class LauncherServiceImpl implements LauncherService {
 
 	@Override
 	public void launcher(SpringApplicationBuilder builder, String appName, String profile) {
-		// 系统属性扩展启动参数，SimpleCommandLinePropertySource > MapPropertySource / JNDI Java 系统属性 > SystemEnvironmentPropertySource > 配置文件（如 application.yml）
+		// 系统属性扩展启动参数，SimpleCommandLinePropertySource > JNDI Java 系统属性 > MapPropertySource > SystemEnvironmentPropertySource > 配置文件（如 application.yml）
+		// 命令行参数 → JNDI（通常在 Servlet 容器中才会生效） → Java 系统属性（-D）→ 系统环境变量 → 配置文件 → 默认属性（通过 SpringApplication.setDefaultProperties() 设置）
 		Properties props = System.getProperties();
 		PropsUtil.setProperty(props, "spring.cloud.nacos.username", LauncherConstant.NACOS_USERNAME);
 		PropsUtil.setProperty(props, "spring.cloud.nacos.password", LauncherConstant.NACOS_PASSWORD);

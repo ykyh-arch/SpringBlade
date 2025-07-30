@@ -83,7 +83,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		routes.sort(Comparator.comparing(Menu::getSort));
 		// 菜单包装类
 		MenuWrapper menuWrapper = new MenuWrapper();
-		// 过滤得到目录菜单
+		// 过滤得到菜单
 		List<Menu> collect = routes.stream().filter(x -> Func.equals(x.getCategory(), 1)).collect(Collectors.toList());
 		return menuWrapper.listNodeVO(collect);
 	}

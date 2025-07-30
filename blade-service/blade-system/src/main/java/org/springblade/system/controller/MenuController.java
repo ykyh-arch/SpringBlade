@@ -57,7 +57,7 @@ public class MenuController extends BladeController {
 	private IMenuService menuService;
 
 	/**
-	 * 详情
+	 * 详情，权限校验参考：{@link org.springblade.core.secure.interceptor.SecureInterceptor}
 	 */
 	@GetMapping("/detail")
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
@@ -126,7 +126,6 @@ public class MenuController extends BladeController {
 	public R submit(@Valid @RequestBody Menu menu) {
 		return R.status(menuService.saveOrUpdate(menu));
 	}
-
 
 	/**
 	 * 删除

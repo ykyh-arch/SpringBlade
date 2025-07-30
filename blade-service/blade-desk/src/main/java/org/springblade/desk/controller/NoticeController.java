@@ -28,7 +28,9 @@ import org.springblade.common.cache.CacheNames;
 import org.springblade.core.boot.ctrl.BladeController;
 import org.springblade.core.mp.support.Condition;
 import org.springblade.core.mp.support.Query;
+import org.springblade.core.secure.annotation.PreAuth;
 import org.springblade.core.tool.api.R;
+import org.springblade.core.tool.constant.RoleConstant;
 import org.springblade.core.tool.utils.Func;
 import org.springblade.desk.entity.Notice;
 import org.springblade.desk.service.INoticeService;
@@ -64,7 +66,7 @@ public class NoticeController extends BladeController implements CacheNames {
 	}
 
 	/**
-	 * 分页
+	 * 分页，接口权限参考{@link org.springblade.core.secure.aspect.AuthAspect}
 	 */
 	@GetMapping("/list")
 	@Parameters({
@@ -73,8 +75,19 @@ public class NoticeController extends BladeController implements CacheNames {
 	})
 	@ApiOperationSupport(order = 2)
 	@Operation(summary = "分页", description = "传入notice")
+	// @PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	public R<IPage<NoticeVO>> list(@Parameter(hidden = true) @RequestParam Map<String, Object> notice, Query query) {
 		IPage<Notice> pages = noticeService.page(Condition.getPage(query), Condition.getQueryWrapper(notice, Notice.class));
+		return R.data(NoticeWrapper.build().pageVO(pages));
+	}
+
+	/**
+	 * 自定义分页
+	 */
+	@GetMapping("/page")
+	@Operation(summary = "分页", description = "传入notice")
+	public R<IPage<NoticeVO>> page(Notice notice, Query query) {
+		IPage<Notice> pages = noticeService.selectNoticePage(Condition.getPage(query), notice);
 		return R.data(NoticeWrapper.build().pageVO(pages));
 	}
 

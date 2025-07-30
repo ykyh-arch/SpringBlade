@@ -38,11 +38,14 @@ public interface NoticeMapper extends BaseMapper<Notice> {
 	List<Notice> topList(Integer number);
 
 	/**
-	 * 自定义分页
+	 * 自定义分页，处理逻辑参考：{@link org.springblade.core.datascope.handler.BladeDataScopeHandler}
 	 * @param page
 	 * @param notice
 	 * @return
 	 */
+	// @DataAuth(type = DataScopeEnum.CUSTOM, value = "where scope.create_user = ${userId} or scope.create_dept in (${deptId})")
+	// @DataAuth(type = DataScopeEnum.OWN,column = "create_user")
+	@DataAuth(code = "notice") // 半自动方式
 	List<Notice> selectNoticePage(IPage page, Notice notice);
 
 }

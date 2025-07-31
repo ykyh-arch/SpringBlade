@@ -14,6 +14,7 @@
     <artifactId>blade-develop</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+    <description>代码生成以及多数据源配置</description>
 
     <dependencies>
         <!--Blade-->

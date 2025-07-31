@@ -31,8 +31,10 @@ public class GrantTreeVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	// 菜单权限
 	private List<MenuVO> menu;
 
+	// 数据权限
 	private List<MenuVO> dataScope;
 
 }

@@ -125,6 +125,7 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, Tenant> imp
 		return super.saveOrUpdate(tenant);
 	}
 
+	// 唯一的租户id，采用递归方式
 	private String getTenantId(List<String> codes) {
 		String code = tenantId.generate();
 		if (codes.contains(code)) {

@@ -12,6 +12,7 @@
     <artifactId>blade-gateway</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
+    <description>Spring Cloud 网关</description>
 
     <dependencies>
         <!--Blade-->

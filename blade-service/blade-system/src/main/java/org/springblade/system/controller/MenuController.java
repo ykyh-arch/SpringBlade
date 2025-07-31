@@ -172,7 +172,7 @@ public class MenuController extends BladeController {
 	}
 
 	/**
-	 * 获取权限分配树形结构
+	 * 获取权限分配树形结构，菜单权限 + 数据权限数据
 	 */
 	@GetMapping("/grant-tree")
 	@ApiOperationSupport(order = 10)
@@ -185,7 +185,7 @@ public class MenuController extends BladeController {
 	}
 
 	/**
-	 * 获取权限分配树形结构
+	 * 获取权限分配树形结构，菜单权限 + 数据权限key
 	 */
 	@GetMapping("/role-tree-keys")
 	@ApiOperationSupport(order = 11)

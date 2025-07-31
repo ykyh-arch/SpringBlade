@@ -99,6 +99,7 @@ public class GatewayFilter implements WebFilter, Ordered {
 			String path = request.getPath().value();
 			String ip = Objects.requireNonNull(request.getRemoteAddress()).getHostString();
 			if (isRequestBlock(path, ip)) {
+				// 请求ip、path是否合法
 				throw new RuntimeException(DEFAULT_MESSAGE);
 			}
 		}
@@ -116,6 +117,7 @@ public class GatewayFilter implements WebFilter, Ordered {
 		List<String> whiteList = requestProperties.getWhiteList();
 		String[] defaultWhiteIps = defaultWhiteList.toArray(new String[0]);
 		String[] whiteIps = whiteList.toArray(new String[0]);
+		// 正则匹配ip是否合法
 		return PatternMatchUtils.simpleMatch(defaultWhiteIps, ip) || PatternMatchUtils.simpleMatch(whiteIps, ip);
 	}
 

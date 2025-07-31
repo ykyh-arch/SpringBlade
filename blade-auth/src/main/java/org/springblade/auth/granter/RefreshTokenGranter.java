@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * RefreshTokenGranter
+ * RefreshTokenGranter 刷新令牌授权器
  *
  * @author Chill
  */

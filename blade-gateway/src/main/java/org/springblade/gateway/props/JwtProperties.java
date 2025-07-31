@@ -21,7 +21,7 @@ import org.springblade.core.launch.constant.TokenConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * JWT配置
+ * JWT配置 -  使用 @org.springblade.test.SignKeyGenerator 获取生产签名密钥
  *
  * @author Chill
  */

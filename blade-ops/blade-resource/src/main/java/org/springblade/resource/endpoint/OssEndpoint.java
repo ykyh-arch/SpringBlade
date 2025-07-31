@@ -53,7 +53,7 @@ public class OssEndpoint {
 	}
 
 	/**
-	 * 创建存储桶
+	 * 删除存储桶
 	 *
 	 * @param bucketName 存储桶名称
 	 * @return R
